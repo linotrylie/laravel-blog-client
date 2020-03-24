@@ -29,6 +29,7 @@
     </el-row>
     <div class="block pagination">
         <el-pagination
+                @size-change="handlePageSizeChange"
                 @current-change="handleCurrentPageChange"
                 :current-page="meta.pagination.page"
                 layout="total, sizes, prev, pager, next, jumper"
@@ -56,7 +57,7 @@ export default {
   },
   methods: {
     loadPost () {
-      this.$http.get('http://laravel-blog-server.com/home/posts_list?page_siz=' + this.pageData.page_size + '&page=' + this.pageData.page)
+      this.$http.get('http://laravel-blog-server.com/home/posts_list?page_size=' + this.pageData.page_size + '&page=' + this.pageData.page)
         .then(response => {
           this.lists = response.data.data.data
           this.meta = response.data.data.meta
@@ -69,14 +70,20 @@ export default {
     handleCurrentPageChange (selectedPageNo) {
       this.meta.pagination.page = selectedPageNo
       // 下面的事件解释如上
-      this.load(this.meta.pagination.page)
+      this.load(this.pageData.page_size, this.meta.pagination.page)
     },
-    load (page) {
-      this.$http.get('http://laravel-blog-server.com/home/posts_list?page_siz=' + this.pageData.page_size + '&page=' + page)
+    handlePageSizeChange (selectedPageSize) {
+      this.pageData.page_size = selectedPageSize
+      // 下面是改变了页面展示条数，需要马上触发的事件，如页面展示的一些记录，如果改变了每页展示的条数，也需要马上获取后台的数据
+      this.load(this.pageData.page_size, this.meta.pagination.page)
+    },
+    load (pageSize, page) {
+      console.log(pageSize)
+      console.log(page)
+      this.$http.get('http://laravel-blog-server.com/home/posts_list?page_size=' + pageSize + '&page=' + page)
         .then(response => {
           this.lists = response.data.data.data
           this.meta = response.data.data.meta
-          console.log(this.meta)
         })
         .catch(err => {
           console.log(err)
