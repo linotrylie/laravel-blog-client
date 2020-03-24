@@ -64,7 +64,6 @@ export default {
         border-radius: 4px;
     }
     .bg-purple {
-        background: #ff2;
     }
     .web-title{
         font-size: 2em;

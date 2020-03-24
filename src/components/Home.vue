@@ -1,29 +1,46 @@
 <template>
   <div class="home">
     <el-row :gutter="20" flex="flex" justify="center" align="middle">
-      <el-col :span="16" :offset="3"><div class="el-col-16"></div></el-col>
-      <el-col :span="8" :offset="16">
+      <el-col :span="14" :offset="3">
+        <div class="post-list">
+            <List></List>
+        </div>
+      </el-col>
+      <el-col :span="4" :offset="1">
         <div class="aside">
-          <div class="el-col-8"></div>
-          <div class="el-col-8"></div>
-          <div class="el-col-8"></div>
+          <div class="my"></div>
+          <div class="messagebox"></div>
+          <div class="link"></div>
         </div>
       </el-col>
     </el-row>
+    <el-tooltip placement="top" content="返回顶部">
+      <!-- 组件使用 -->
+      <BackTop
+              transitionName="fade"
+              :customStyle="myBackToTopStyle"
+              :visibilityHeight="300"
+              :backPosition="0">
+      </BackTop>
+    </el-tooltip>
   </div>
 </template>
 
 <script>
+import BackTop from '@/components/backtop/Backtop'
+import List from '@/components/post/List'
 export default {
   name: 'Home',
+  components: { List, BackTop },
   data () {
     return {
     }
   },
   methods: {
-    login () {
-      console.log()
-    }
+
+  },
+  mounted () {
+
   }
 }
 </script>
@@ -36,21 +53,28 @@ export default {
   ::-webkit-scrollbar {
     width: 0 !important;height: 0;
   }
-  .el-col-16{
-    height: 900px;
-    width: 45%;
-    background-color: aquamarine;
+  .el-col-17{
+    height: 600px;
     z-index: 1;
   }
-  .el-col-8{
+  .my{
     height: 300px;
-    width: 335px;
-    float: right;
+    width: 300px;
     background-color: bisque;
   }
+  .messagebox{
+      height: 300px;
+      width: 300px;
+      background-color: burlywood;
+      margin-top: 20px;
+  }
+  .link {
+      height: 300px;
+      width: 300px;
+      background-color: burlywood;
+      margin-top: 20px;
+  }
   .aside{
-    height: 900px;
-    width: 335px;
-    position: fixed;
+    height: 100px;
   }
 </style>

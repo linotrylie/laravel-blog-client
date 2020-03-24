@@ -79,7 +79,7 @@ export default {
   width: 100%;
 }
   .el-main{
-    height: 9000px;
+    height: 1000px;
     width: 100%;
     z-index: 8;
     margin-top: 70px;
