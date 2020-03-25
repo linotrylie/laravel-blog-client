@@ -8,7 +8,9 @@
       </el-col>
       <el-col :span="4" :offset="1">
         <div class="aside">
-          <div class="my"></div>
+          <div class="my">
+            <UserInfo></UserInfo>
+          </div>
           <div class="messagebox"></div>
           <div class="link"></div>
         </div>
@@ -16,22 +18,22 @@
     </el-row>
     <el-tooltip placement="top" content="返回顶部">
       <!-- 组件使用 -->
-      <BackTop
+      <BackToTop
               transitionName="fade"
-              :customStyle="myBackToTopStyle"
               :visibilityHeight="300"
               :backPosition="0">
-      </BackTop>
+      </BackToTop>
     </el-tooltip>
   </div>
 </template>
 
 <script>
-import BackTop from '@/components/backtop/Backtop'
+import BackToTop from '@/components/backtop/Backtop'
 import List from '@/components/post/List'
+import UserInfo from '@/components/user/Info'
 export default {
   name: 'Home',
-  components: { List, BackTop },
+  components: { List, BackToTop, UserInfo },
   data () {
     return {
     }
@@ -60,7 +62,7 @@ export default {
   .my{
     height: 300px;
     width: 300px;
-    background-color: bisque;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   }
   .messagebox{
       height: 300px;

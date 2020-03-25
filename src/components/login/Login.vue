@@ -72,8 +72,7 @@ export default {
             .then(res => {
               if (res.data.code === 200) {
                 this.$cookies.set('token', res.data.data.token)
-                this.$cookies.set('user_id', res.data.data.id)
-                this.$cookies.set('phone', res.data.data.phone)
+                this.$cookies.set('user', res.data.data)
                 this.$notify({
                   title: '提示信息',
                   message: res.data.message,

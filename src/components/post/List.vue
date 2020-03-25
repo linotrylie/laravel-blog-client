@@ -1,8 +1,11 @@
 <template>
 <div class="post-list">
-    <el-row class="art-item" v-for="post in lists" align="center">
+    <el-row class="art-item" v-for="post in lists" align="center" :key="post.id">
         <el-card shadow="hover">
-            <h5><router-link to="/article" tag="span" class="art-title">{{post.title}}</router-link></h5>
+            <div class="top">
+                <i class="el-icon-top" v-if="post.sort" style="font-size: 24px;">置顶</i>
+            </div>
+            <h5><router-link :to="{name:'Article',query:{postId:post.id}}" tag="span" class="art-title">{{post.title}}</router-link></h5>
             <el-row class="art-info d-flex align-items-center justify-content-start">
                 <div class="art-time"><i class="el-icon-time"></i>：{{post.created_at}}</div>
                 <div class="d-flex align-items-center">
@@ -11,27 +14,33 @@
             </el-row>
             <el-row class="art-body">
                 <div class="side-img hidden-sm-and-down">
-                    <!--<img class="art-banner" src="">-->
+                    <div v-if="post.banner">
+                        <img class="art-banner" :src="post.banner">
+                    </div>
+                    <div v-else>
+                        <img class="art-banner" src="../../assets/1.jpg">
+                    </div>
                 </div>
                 <div class="side-abstract">
                     <div class="art-abstract" v-html="post.text">
                     </div>
                     <div class="art-more">
-                        <router-link to="/article" tag="span">
-                            <el-button plain>更多</el-button>
-                        </router-link>
-                        <div class="view"><i class="el-icon-view"></i>{{post.views}}</div>
+                        <el-button plain @click="toArticle(post.id)">阅读全文</el-button>
+                        <div class="view"><i class="el-icon-view"></i>{{ post.views }}</div>
+                        <div class="view"><i class="el-icon-chat-dot-round"></i>{{ post.comments }}</div>
+                        <div class="view"><i class="el-icon-position"></i>{{ post.shares }}</div>
+                        <div class="view"><i class="el-icon-star-off"></i>{{ post.follows }}</div>
                     </div>
                 </div>
             </el-row>
+
         </el-card>
-        <!--<img class="star" src="" />-->
     </el-row>
     <div class="block pagination">
         <el-pagination
                 @size-change="handlePageSizeChange"
                 @current-change="handleCurrentPageChange"
-                :current-page="meta.pagination.page"
+                :current-page="meta.pagination.current_page"
                 layout="total, sizes, prev, pager, next, jumper"
                 :total="meta.pagination.total"
 
@@ -88,6 +97,10 @@ export default {
         .catch(err => {
           console.log(err)
         })
+    },
+    toArticle (id) {
+      console.log(id)
+      this.$router.push({path: '/article', query: {postId: id}})
     }
   },
   mounted () {
@@ -119,7 +132,10 @@ export default {
         width: 16px;
         height: 16px;
     }
-
+    .star{
+        width: 50px;
+        height: 50px;
+    }
     .art-title {
         border-left: 3px solid #F56C6C;
         padding-left: 5px;
@@ -150,6 +166,7 @@ export default {
     img.art-banner {
         width: 100%;
         height: 100%;
+        border-radius: 10px;
         transition: all 0.6s;
     }
 
@@ -166,6 +183,7 @@ export default {
     .art-abstract {
         flex: 1;
         color: #aaa;
+        text-align: left;
     }
 
     .art-more {
@@ -183,5 +201,8 @@ export default {
     }
     .pagination {
         background-color: #F9F9F9;
+    }
+    .top{
+        float: right;
     }
 </style>
