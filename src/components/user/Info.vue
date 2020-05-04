@@ -46,7 +46,7 @@ export default {
     checkLogin () {
       let token = this.$cookies.get('token')
       let user = this.$cookies.get('user')
-      if (token.length == 0 || user.length == 0) {
+      if (token.length === 0 || user.length === 0) {
         this.isLogin = false
       } else {
         this.isLogin = true

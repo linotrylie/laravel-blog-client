@@ -11,11 +11,13 @@
                     <template slot="title">{{menu.menu_name}}</template>
                         <app-menu-list :data="menu.all_home_menu"></app-menu-list>
                 </el-submenu>
-                <el-menu-item v-else :index="menu.router" :key="menu.id">
-                    <router-link :to="menu.router">
-                        {{menu.menu_name}}
-                    </router-link>
-                </el-menu-item>
+                    <el-menu-item v-else :index="menu.router" :key="menu.id">
+                        <label>
+                            <router-link :to="menu.router">
+                                {{menu.menu_name}}
+                            </router-link>
+                        </label>
+                    </el-menu-item>
             </template>
         </el-menu>
     </div>

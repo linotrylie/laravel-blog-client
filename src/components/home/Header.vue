@@ -3,7 +3,7 @@
         <el-col :span="6">
             <div class="grid-content bg-purple">
                 <router-link to="/" class="web-title">
-                    {{ webName }}
+                        <span>{{ webName }}</span>
                 </router-link>
             </div>
         </el-col>
@@ -59,6 +59,7 @@ export default {
 <style scoped>
     .el-row {
         margin-bottom: 20px;
+        opacity: 0.9;
     }
     .el-col {
         border-radius: 4px;
@@ -67,6 +68,7 @@ export default {
     }
     .web-title{
         font-size: 2em;
+            text-shadow: -2px -2px 3px rgba(0,0,0,0.2);/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
     }
     .router-link-active {
         text-decoration: none;

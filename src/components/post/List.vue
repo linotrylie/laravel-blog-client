@@ -18,7 +18,7 @@
                         <img class="art-banner" :src="post.banner">
                     </div>
                     <div v-else>
-                        <img class="art-banner" src="../../assets/1.jpg">
+                        <img class="art-banner" src="../../images/bg/bg2.jpg">
                     </div>
                 </div>
                 <div class="side-abstract">
@@ -111,6 +111,12 @@ export default {
 </script>
 
 <style scoped>
+    .el-card {
+        opacity: 0.9;
+    }
+    .post-list {
+        height: 100%;
+    }
     #side .item {
         margin-bottom: 30px;
     }
@@ -128,7 +134,7 @@ export default {
         right: 0;
     }
 
-    img.tag {
+    img .tag {
         width: 16px;
         height: 16px;
     }

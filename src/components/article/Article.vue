@@ -1,36 +1,32 @@
 <template>
-    <div>
-        <el-row class="main">
-            <el-col :span="16" :offset="4">
-                <div id="artcle-info">
-                    <h2 class="text-center"><strong>{{post.title}}</strong></h2>
-                    <!-- 描述：文章信息 -->
-                    <div class="text-center timeAndView">
-						<span class="article-time">
-							<i class="el-icon-time"></i>
-							发表于：<span>{{post.created_at}}</span>
-						</span>
-                        &nbsp;|&nbsp;
-                        <span class="article-views">
-							<i class="el-icon-view"></i>
-							阅读量：<span>{{post.views}}</span>
-						</span>
-                    </div>
-                </div>
-                <hr />
-                <div class="entry-content">
-                    <div v-html="post.text"></div>
-                </div>
-                <br>
-                <div id="statement">
-                    <div class="item">作者:{{post.auth_name}}</div>
-                    <div class="item">原文链接：
-                        <a href="https://www.pling.top">https://www.pling.top</a>
-                    </div>
-                    <div class="item">Linotrylie：本博客所有文章除特别声明外,转载请注明出处!</div>
-                </div>
-            </el-col>
-        </el-row>
+    <div class="article-main">
+        <div id="artcle-info">
+        <h2 class="text-center"><strong>{{post.title}}</strong></h2>
+        <!-- 描述：文章信息 -->
+        <div class="text-center timeAndView">
+                <span class="article-time">
+                    <i class="el-icon-time"></i>
+                    发表于：<span>{{post.created_at}}</span>
+                </span>
+            &nbsp;|&nbsp;
+            <span class="article-views">
+                    <i class="el-icon-view"></i>
+                    阅读量：<span>{{post.views}}</span>
+                </span>
+        </div>
+    </div>
+        <hr />
+        <div class="entry-content">
+            <div v-html="post.text"></div>
+        </div>
+        <br>
+        <div id="statement">
+            <div class="item">作者:{{post.auth_name}}</div>
+            <div class="item">原文链接：
+                <a href="https://www.pling.top">https://www.pling.top</a>
+            </div>
+            <div class="item">Linotrylie：本博客所有文章除特别声明外,转载请注明出处!</div>
+        </div>
     </div>
 </template>
 
@@ -75,9 +71,14 @@ export default {
 </script>
 
 <style scoped>
+    .article-main {
+        width: 60%;
+        margin: 0 auto;
+    }
     #artcle-info {
         padding: 20px;
-        background-image: url(../../assets/1.jpg);
+        background-image: url(../../images/bg/bg2.jpg);
+        background-size: 100%;
         margin-bottom: 40px;
     }
     #artcle-info .timeAndView {
@@ -85,11 +86,6 @@ export default {
         line-height: 30px;
         font-size: 16px;
         color: #ffffff;
-    }
-
-    pre {
-        color: #ffffff;
-        background-color: rgba(0, 0, 0, 0.8);
     }
 
     img{
@@ -103,7 +99,24 @@ export default {
         padding: 20px;
         background-color: #EBEEF5;
     }
-    .entry-content ul {
+    .entry-content {
+        background-color: #fff;
+        position: relative;
+        text-align: left;
+        padding-left: 8px;
+        padding-bottom: 15px;
+        opacity: 0.9;
+    }
+    .entry-content >>> pre {
+        background-color: rgba(0, 0, 0, 0.8);
+        background: #eee;
+        width: 80%;
+        margin: 0 auto;
+        color: saddlebrown;
+        font-size: 1.3em;
+        opacity: 1 !important;
+    }
+    .entry-content >>> ul {
         list-style: disc;
         padding: 5px 10px 5px 50px;
         color: #828282;
@@ -112,7 +125,7 @@ export default {
         border-radius: 5px;
     }
 
-    .entry-content ol {
+    .entry-content >>> ol {
         list-style: decimal;
         padding: 5px 10px 5px 50px;
         color: #828282;
@@ -121,38 +134,35 @@ export default {
         border-radius: 5px;
     }
 
-    .entry-content ol li , .entry-content ul li {
+    .entry-content >>> ol li , .entry-content >>> ul li {
         padding: 15px 0;
         border-top: 1px solid #ddd;
     }
 
-    .entry-content ol li:first-child , .entry-content ul li:first-child {
+    .entry-content >>> ol li:first-child , .entry-content >>> ul li:first-child {
         border-top: none;
     }
 
-    .entry-content {
-        position: relative;
-        text-align: left;
-    }
 
-    .entry-content h2 {
+
+    .entry-content >>> h2 {
         color: #737373;
         font-size: 20px;
     }
-    .entry-content h2:before {
+    .entry-content >>> h2:before {
         content: "[";
         margin-right: 5px;
         color: #ff6d6d;
         font-size: 25px;
     }
-    .entry-content h2:after {
+    .entry-content >>> h2:after {
         content: "]";
         margin-left: 5px;
         color: #ff6d6d;
         font-size: 25px;
     }
 
-    .entry-content h3 {
+    .entry-content >>> h3 {
         color: #6d6c6c;
         background: #F9F9F9;
         padding: 10px 0 10px 20px;
@@ -162,7 +172,7 @@ export default {
         border-radius: 3px;
     }
 
-    .entry-content h4 , .entry-content h5 {
+    .entry-content >>> h4 , .entry-content >>> h5 {
         padding: 20px 35px;
         background: #FFF6B5;
         color: #737373;
@@ -173,12 +183,12 @@ export default {
         box-shadow: 0 2px 3px rgba(0,0,0,.06);
     }
 
-    .entry-content h5 {
+    .entry-content >>> h5 {
         font-size: 16px;
         background: #C8E6FB;
     }
 
-    .entry-content h4:before , .entry-content h5:before{
+    .entry-content >>> h4:before , .entry-content >>> h5:before{
         font-family: 'iconfont';
         font-size: 25px;
         content: "\e60b";
@@ -189,24 +199,23 @@ export default {
         top: 16px;
     }
 
-    .entry-content h5:before {
+    .entry-content >>> h5:before {
         content: "\e605";
         color: #7C9AAF;
     }
 
-    .entry-content code {
-        background: #f9f9f9;
+    .entry-content >>> code {
         color: #E67474;
         padding: 2px 4px;
         border-radius: 2px;
     }
 
-    .entry-content a {
+    .entry-content >>> a {
         color: #E67474;
         text-decoration: underline;
     }
 
-    .entry-content a:hover {
+    .entry-content >>> a:hover {
         color: #72C5A6;
     }
 

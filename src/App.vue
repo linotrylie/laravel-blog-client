@@ -1,14 +1,14 @@
 <template>
-  <div id="app">
+  <div id="app" :style="backgroundImage" style="background-size: 100%">
     <el-container>
-      <el-header id="fixedBar" :class="{ fixedBar: isFixed }">
-        <app-header></app-header>
+      <el-header>
+          <app-header/>
       </el-header>
       <el-main>
         <router-view/>
       </el-main>
       <el-footer>
-        <app-footer></app-footer>
+          <app-footer/>
       </el-footer>
     </el-container>
   </div>
@@ -17,6 +17,7 @@
 <script>
 import AppFooter from './components/home/Footer'
 import AppHeader from './components/home/Header'
+import allBackgroundImages from './images/bg'
 export default {
   name: 'App',
   components: {AppHeader, AppFooter},
@@ -24,7 +25,8 @@ export default {
     return {
       isFixed: false, // bar浮动
       offsetTop: 0, // 触发bar浮动的阈值
-      marginTop: 0 // 触发bar浮动的同时 给数据列表一个margin-top 防止列表突然上移 会很突兀
+      marginTop: 0, // 触发bar浮动的同时 给数据列表一个margin-top 防止列表突然上移 会很突兀
+        allBackgroundImages
     }
   },
   mounted () {
@@ -53,35 +55,46 @@ export default {
   },
   destroyed () {
     window.removeEventListener('scroll', this.handleScroll) // 离开页面 关闭监听 不然会报错
-  }
+  },
+    computed:{
+        backgroundImage() {
+            // 根据背景图数组的长度随机选择索引
+            const randIndex = Math.floor(Math.random() * this.allBackgroundImages.length)
+            return {
+                // 获取对应的图片资源并将其设置到`background-image`属性上
+                backgroundImage: `url(${this.allBackgroundImages[randIndex]})`
+            }
+        }
+    }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+    #app {
+        /*font-family: 'Avenir', Helvetica, Arial, sans-serif;*/
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: center;
+        /*color: #2c3e50;*/
+        /*background-image: url("./assets/img/app/app-background-image.jpg");*/
+    }
+    img {
+        width: 100%;
+        height: 100%;
+    }
 ::-webkit-scrollbar {
   width: 0 !important;
 }
 ::-webkit-scrollbar {
   width: 0 !important;height: 0;
 }
-.el-header{
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  position: fixed;
-  top: 0;
-  z-index: 9;
-  width: 100%;
-}
-  .el-main{
-    height: 1000px;
-    width: 100%;
-    z-index: 8;
-    margin-top: 70px;
-  }
+    .el-header{
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+        top: 0;
+        width: 100%;
+    }
+    .el-main{
+        width: 100%;
+        margin-top: 60px;
+    }
 </style>

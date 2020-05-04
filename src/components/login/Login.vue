@@ -118,7 +118,6 @@ export default {
         width: 100%;
         height: 100%;
         display: flex;
-        background-image: linear-gradient(to bottom right,#66b1ff,#fef0f0);
         z-index:1;
     }
     .login-container{
@@ -129,7 +128,6 @@ export default {
         border-radius: 15px;
         margin: 200px auto;
         justify-content: center;
-        background-image: linear-gradient(to bottom right,rgb(100,149,237),rgb(176,196,222)) ;
         z-index: 10;
     }
     h3{
